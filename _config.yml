@@ -12,8 +12,6 @@
 
 theme: jekyll-theme-minimal
 logo: /imgs/logo.gif
-layout: single
-title: test
 header:
  images: /imgs/header.jpg
 # Defaults
