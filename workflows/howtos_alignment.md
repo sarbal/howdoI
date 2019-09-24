@@ -1,18 +1,4 @@
----
-title: "How-to: align RNA-seq data"
-author: "Sara Ballouz"
-date: "September 23, 2019"
-output: 
-  html_document:
-    toc: true
-    toc_depth: 3
-    toc_float: true
-    number_sections: true
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+# How-to: align RNA-seq data 
 
 # Aligning with STAR
 ## Get the latest version of STAR. 
