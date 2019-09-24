@@ -1,6 +1,13 @@
 markdown: kramdown
 theme: jekyll-theme-minimal
 logo: /imgs/logo.gif
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      author_profile: true
 header: 
   image: "/imgs/header.jpg"
 toc: true
