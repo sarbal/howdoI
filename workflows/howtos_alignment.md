@@ -104,7 +104,7 @@ Run from the same directory or from the genome location. Specify output director
 ### Generate gene annotation file. 
 This is helpful for downstream analyses. Note, ensemblIDs are not unique for XY paralogs and some tRNAs/rRNAs. This ignores them but maybe shouldn't. Needs some manual inspection when/if file is not exactly consistent (i.e., other species, new versions.)
 
-```{r, eval=FALSE}
+```{r}
 temp = read.table("gencode.v31.annotation.gtf.gz", header=F, sep="\t")
 uid2symbol = read.table("9606.ID2name", header=F)
 uid2symbol = unique(uid2symbol)
@@ -221,7 +221,7 @@ Note, read 2 from output needs to come before read 1 because of the chemistry of
 
 ### Parsing STAR output in R
 #### Example from multiple bulk runs
-```{r, eval=FALSE}
+```{r}
 files = as.character(unlist(read.table("runs") ))
 genecounts = "ReadsPerGene.out.tab"
 splicejunctions = "SJ.out.tab"
