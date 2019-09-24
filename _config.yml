@@ -1,4 +1,4 @@
 markdown: kramdown
 theme: jekyll-theme-minimal
 logo: /imgs/logo.gif
-toc: true
+sidebar: /_includes/toc.html
