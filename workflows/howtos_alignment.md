@@ -283,7 +283,8 @@ barcodes.tsv  Gene.stats  genes.tsv  matrix.mtx
 ```
 
 Adapted from: https://davetang.org/muse/2018/08/09/getting-started-with-cell-ranger/ 
-```{r, eval=FALSE}
+
+```{r}
 library(DropletUtils)
 library(dplyr)
 library(ggplot2)
