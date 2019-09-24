@@ -1,5 +1,6 @@
 markdown: kramdown
 theme: jekyll-theme-minimal
 logo: /imgs/logo.gif
-image: /imgs/header.jpg
+header: 
+ image: /imgs/header.jpg
 toc: true
