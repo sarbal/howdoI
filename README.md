@@ -16,7 +16,9 @@ Some brief tutorials on how-to do some genomic and transcriptomic analyses.
 
 [perform gene set enrichment](/workflows/howtos_dna_alignment.Rmd) 
 
-[build gene co-expression networks](/workflows/howtos_dna_alignment.Rmd) 
+[build gene co-expression networks](/workflows/howtos_coexpnets.Rmd) 
+
+[assess gene co-expression networks](/workflows/howtos_EGAD.Rmd) 
 
 
 [test for replicability of bulk RNA-seq samples with replicates](/workflows/howtos_aupairwise.Rmd) 
