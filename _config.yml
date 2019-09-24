@@ -7,14 +7,9 @@ defaults:
       path: ""
       type: posts
     values:
+      layout: single
       author_profile: true
-header: 
-  image: "/imgs/header.jpg"
-toc: true
-sidebar:
-  - title: "Title"
-    image:  "/imgs/header.jpg" 
-    image_alt: "image"
-    text: "Some text here."
-  - title: "Another Title"
-    text: "More text here."
+      read_time: true
+      comments: true
+      share: true
+      related: true
