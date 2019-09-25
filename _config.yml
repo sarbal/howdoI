@@ -1,8 +1,7 @@
 markdown: kramdown
-kramdown:
-  parse_block_html: true
-  
 theme: jekyll-theme-minimal
 logo: /imgs/logo.gif
 header:
  images: /imgs/header.jpg
+plugins:
+  - jekyll-toc
