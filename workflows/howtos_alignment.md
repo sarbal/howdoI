@@ -1,5 +1,6 @@
-# How-to: align RNA-seq data 
-
+---
+title: 'How-to: align RNA-seq data '
+---
 # Aligning with STAR
 ## Get the latest version of STAR. 
 All things STAR here: https://github.com/alexdobin/STAR. 
