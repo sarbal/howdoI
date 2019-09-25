@@ -1,4 +1,6 @@
-# How-to: run EGAD 
+---
+title: 'How-to: run EGAD' 
+---
 
 EGAD is an R package for the functional analysis of gene networks. It contains a series of tools to calculate functional properties in networks based on the guilt-by-association principle. 
 
