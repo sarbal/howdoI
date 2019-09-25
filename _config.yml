@@ -3,4 +3,3 @@ theme: jekyll-theme-minimal
 logo: /imgs/logo.gif
 header:
  images: /imgs/header.jpg
-{% include toc.html html=content %}
