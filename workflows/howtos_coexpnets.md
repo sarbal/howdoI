@@ -6,8 +6,8 @@ output:
   pdf_document: default
   html_document: default
 ---
-## Co-expression - bulk 
-### 1. Data 
+# Co-expression - bulk 
+## Data 
 Read in expression data. This could be counts or normalized data. 
 ```{}
 counts = read.table("counts.txt")
@@ -16,14 +16,14 @@ keep = rowSums(cpm) > 0
 ```
 
 
-### 2. Building coexpression networks 
+##  Building coexpression networks 
 ```{}
 net = EGAD::build_coexp_network(cpm, genes[keep])
 nd = EGAD::node_degree(net)
 EGAD::plot_distribution(nd, xlab="Node degrees")
 ```
 
-### 3. Aggregating 
+##  Aggregating 
 ```{} 
 agg = diag(sum(keep))
  
@@ -54,7 +54,7 @@ agg.rank = agg.rank/max(agg.rank, na.rm=T)
 ```
 
 
-### 4. Assessing  
+##  Assessing  
 ```{}
 aurocs = run_GBA(agg.rank, annotations)
 aurocs[[2]] = ""
@@ -62,8 +62,8 @@ EGAD::plot_density_compare(aurocs[[1]][,1], aurocs[[1]][,3])
 ```
 
  
-## Co-expression - single-cell 
-### 1. Data 
+#  Co-expression - single-cell 
+## Data 
 ```{}
 library(Seurat)
 data <- Read10X(data.dir = "U:/XSKEW/sc/10x/v3_chemistry/10k_pbmcs_healthy_donor/filtered_feature_bc_matrix/")
@@ -89,7 +89,7 @@ save(pbmc, file="pbmc.Rdata")
 ```
 
 
-### 2. Building coexpression networks 
+##  Building coexpression networks 
 ```{}
 exprs = pbmc@assays$RNA@scale.data
 net = build_coexp_network(exprs, genes )
@@ -110,7 +110,7 @@ save(net, file="coexp.cpm.Rdata")
 
 ```
 
-### 3. Aggregating 
+##  Aggregating 
 ```{} 
 agg = diag(sum(keep))
  
@@ -141,7 +141,7 @@ agg.rank = agg.rank/max(agg.rank, na.rm=T)
 ```
 
 
-### 4. Assessing  
+## Assessing  
 ```{}
 aurocs = run_GBA(agg.rank, annotations)
 aurocs[[2]] = ""
