@@ -1,4 +1,4 @@
-How-to: align RNA-seq data 
+# How-to: align RNA-seq data 
 
 # Aligning with STAR
 ## Get the latest version of STAR. 
