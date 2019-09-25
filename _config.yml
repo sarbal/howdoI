@@ -1,29 +1,8 @@
-theme: jekyll-theme-minimal
+markdown: kramdown
+plugins:
+    - jekyll-remote-theme
+remote_theme: allejo/jekyll-docs-theme
+
 logo: /imgs/logo.gif
 header:
  images: /imgs/header.jpg
- 
- 
- # name of the software
-name: Test
-ui:
-    header:
-        color1: "#080331"
-        color2: "#673051"
-        trianglify: true
-
-social:
-    github:
-        user: sarbal
-    twitter:
-        enabled: false
-        via:
-        hash:
-        account: saraballouz
-
-
-# Build settings
-markdown: kramdown
-exclude:
-    - Gemfile
-    - Gemfile.lock
