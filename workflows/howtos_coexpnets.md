@@ -6,15 +6,10 @@ output:
   pdf_document: default
   html_document: default
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 ## Co-expression - bulk 
 ### 1. Data 
 Read in expression data. This could be counts or normalized data. 
-```{r, eval=FALSE}
+```{}
 counts = read.table("counts.txt")
 cpm = calc_cpm(counts)
 keep = rowSums(cpm) > 0
@@ -22,14 +17,14 @@ keep = rowSums(cpm) > 0
 
 
 ### 2. Building coexpression networks 
-```{r, eval=FALSE}
+```{}
 net = EGAD::build_coexp_network(cpm, genes[keep])
 nd = EGAD::node_degree(net)
 EGAD::plot_distribution(nd, xlab="Node degrees")
 ```
 
 ### 3. Aggregating 
-```{r, eval=FALSE} 
+```{} 
 agg = diag(sum(keep))
  
 for (i in 1:n_experiments) {
@@ -60,7 +55,7 @@ agg.rank = agg.rank/max(agg.rank, na.rm=T)
 
 
 ### 4. Assessing  
-```{r, eval=FALSE}
+```{}
 aurocs = run_GBA(agg.rank, annotations)
 aurocs[[2]] = ""
 EGAD::plot_density_compare(aurocs[[1]][,1], aurocs[[1]][,3])
@@ -69,7 +64,7 @@ EGAD::plot_density_compare(aurocs[[1]][,1], aurocs[[1]][,3])
  
 ## Co-expression - single-cell 
 ### 1. Data 
-```{r, eval=FALSE}
+```{}
 library(Seurat)
 data <- Read10X(data.dir = "U:/XSKEW/sc/10x/v3_chemistry/10k_pbmcs_healthy_donor/filtered_feature_bc_matrix/")
 pbmc <- CreateSeuratObject(counts = data, project = "pbmc", min.cells = 3, min.features = 200)
@@ -95,7 +90,7 @@ save(pbmc, file="pbmc.Rdata")
 
 
 ### 2. Building coexpression networks 
-```{r, eval=FALSE}
+```{}
 exprs = pbmc@assays$RNA@scale.data
 net = build_coexp_network(exprs, genes )
 save(net, file="coexp.scaled.Rdata")
@@ -116,7 +111,7 @@ save(net, file="coexp.cpm.Rdata")
 ```
 
 ### 3. Aggregating 
-```{r, eval=FALSE} 
+```{} 
 agg = diag(sum(keep))
  
 for (i in 1:n_experiments) {
@@ -147,7 +142,7 @@ agg.rank = agg.rank/max(agg.rank, na.rm=T)
 
 
 ### 4. Assessing  
-```{r, eval=FALSE}
+```{}
 aurocs = run_GBA(agg.rank, annotations)
 aurocs[[2]] = ""
 EGAD::plot_density_compare(aurocs[[1]][,1], aurocs[[1]][,3])
