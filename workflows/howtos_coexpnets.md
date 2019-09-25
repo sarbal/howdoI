@@ -1,10 +1,5 @@
 ---
 title: 'How-to: build co-expression networks'
-author: "Sara Ballouz"
-date: "September 24, 2019"
-output:
-  pdf_document: default
-  html_document: default
 ---
 # Co-expression - bulk 
 ## Data 
