@@ -1,10 +1,7 @@
----
-title: How do I...
----
+# How do I...
 
 Short tutorials on how-to do genomic and transcriptomic analyses.
 
-# How-to:
 [align RNA-seq data](/workflows/howtos_alignment.md) 
 
 [align DNA-seq data](/workflows/howtos_dna_alignment.md) 
