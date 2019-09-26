@@ -31,7 +31,7 @@ Short tutorials on genomic and transcriptomic analyses.
 
 [test for replicability of single-cell RNA-seq with MetaNeighbor](/workflows/howtos_metaneigh.md) 
 
-
+[allele specific expression analysis](/workflows/howtos_ase.md) 
 
 
 #### Inspired by many:
