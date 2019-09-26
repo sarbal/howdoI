@@ -4,8 +4,6 @@ Short tutorials on genomic and transcriptomic analyses.
 ## Downloading data 
 [download data from SRA](/workflows/howtos_sra.md) 
 
-[download data from GEO](/workflows/howtos_geo.md) 
-
 [download data from gemma](/workflows/howtos_gemma.md) 
 
 ## Aligning RNA-seq 
