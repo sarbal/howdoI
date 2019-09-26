@@ -13,7 +13,7 @@ Short tutorials on how-to do genomic and transcriptomic analyses.
 
 [perform differential gene expression](/workflows/howtos_de.md)
 
-[perform gene set enrichment](/workflows/howtos_dna_alignment.md) 
+[perform gene set enrichment](/workflows/howtos_gse.md) 
 
 [build gene co-expression networks](/workflows/howtos_coexpnets.md) 
 
