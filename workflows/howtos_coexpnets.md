@@ -2,15 +2,16 @@
 title: 'How-to: build co-expression networks'
 ---
  
-Gene expression profiles that co-vary suggest co-regulation, co-function or co-localization, key information necessary to build a functional and condition specific gene-gene interaction data set. This pipeline involves the construction of individual gene co-expression networks, the aggregation of these networks, and then an assessment via neighbor-voting. Differences in bulk and single-cell expression data mean care needs to be taken when generating these networks. We provide guidelines for both. 
+Gene expression profiles that co-vary suggest co-regulation, co-function or co-localization. This pipeline involves the construction of individual gene co-expression networks, the aggregation of these networks, and then an assessment via neighbor-voting. Differences in bulk and single-cell expression data mean care needs to be taken when generating these networks. We provide guidelines for both. 
 
 # Co-expression - bulk RNA-seq
 ## Data 
-Read in expression data. This could be counts or normalized data. 
+Read in expression data. This could be counts or normalized data. A minimum of 20 samples per experiment is recommended. And genes with expression in at least 80% of these samples, with at least 1 CPM.  
 ```{}
 counts = read.table("counts.txt")
 cpm = calc_cpm(counts)
-keep = rowSums(cpm) > 0
+nsamp = dim(counts)[2] 
+keep = rowSums(cpm >=1) > (0.8 * nsamp) 
 ```
 
 ##  Building coexpression networks 
