@@ -39,8 +39,9 @@ diag(gene_network) = 1
 
 ## GO annotations 
 ```{}
+gogenes <- unique(GO.human[,2])
 goterms <- unique(GO.human[,3])
-annotations <- make_annotations(GO.human[,c(2,3)],genelist,goterms)
+annotations <- make_annotations(GO.human[,c(2,3)],gogenes,goterms)
 ```
 
 # Running GBA 
