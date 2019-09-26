@@ -7,8 +7,6 @@ References:
 https://www.broadinstitute.org/files/shared/mpg/nextgen2010/nextgen_li.pdf
 https://genomics.sschmeier.com/ngs-mapping/#mapping-statistics
 
-
-## Aligning with BWA
 ## Get BWA 
 http://sourceforge.net/projects/bio-bwa/files/
 http://bio-bwa.sourceforge.net/bwa.shtml
