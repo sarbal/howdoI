@@ -1,6 +1,9 @@
 ---
 title: 'How-to: download data from SRA'
 ---
+References: 
+https://www.michaelgerth.net/news--blog/how-to-efficiently-bulk-download-ngs-data-from-sequence-read-databases
+
 
 # Using SRA toolkit
 https://ncbi.github.io/sra-tools/install_config.html
@@ -29,9 +32,28 @@ fastq-dump –split-files SRR3485764
 Note, this still downloads the .sra file first. 
 
 # Using aspera connect 
+https://asperasoft.com/
+https://downloads.asperasoft.com/downloads
+https://downloads.asperasoft.com/connect2/ 
+ 
+https://ftp-private.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByRun/sra/SRR/
+https://www.ebi.ac.uk/ena/browse/read-download
+
+https://gist.github.com/mfansler/71f09c8b6c9a95ec4e759a8ffc488be3
+
 ## Install aspera 
+```
+sh aspera-connect-[version].sh
+```
+## Download file 
+```
+ascp -QT -l 300m -P33001 -i <aspera connect installation directory>/etc/asperaweb_id_dsa.openssh era-fasp@fasp.sra.ebi.ac.uk:<file or files to download> <download location>
+```
 
 
-# Direct downloads 
-## FTP from SRA 
-## FTP from EBI 
+# FTP from ENA 
+```
+wget “ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR101/006/SRR1016916/*”
+```
+
+
