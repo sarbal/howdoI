@@ -31,5 +31,7 @@ Short tutorials on genomic and transcriptomic analyses.
 
 [allele specific expression analysis](/workflows/howtos_ase.md) 
 
+[build the gene ontology](/workflows/howtos_go.md) 
+
 
 #### Inspired by many:
