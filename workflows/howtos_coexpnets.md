@@ -1,7 +1,10 @@
 ---
 title: 'How-to: build co-expression networks'
 ---
-# Co-expression - bulk 
+ 
+Gene expression profiles that co-vary suggest co-regulation, co-function or co-localization, key information necessary to build a functional and condition specific gene-gene interaction data set. This pipeline involves the construction of individual gene co-expression networks, the aggregation of these networks, and then an assessment via neighbor-voting. Differences in bulk and single-cell expression data mean care needs to be taken when generating these networks. We provide guidelines for both. 
+
+# Co-expression - bulk RNA-seq
 ## Data 
 Read in expression data. This could be counts or normalized data. 
 ```{}
@@ -10,13 +13,24 @@ cpm = calc_cpm(counts)
 keep = rowSums(cpm) > 0
 ```
 
-
 ##  Building coexpression networks 
 ```{}
 net = EGAD::build_coexp_network(cpm, genes[keep])
 nd = EGAD::node_degree(net)
 EGAD::plot_distribution(nd, xlab="Node degrees")
 ```
+Or 
+```{}
+gene.corr = cor( t(cpm), method="s")) 
+bottom = row(gene.corr) > col(gene.corr) 
+gene.ranked = rank(gene.corr[bottom] , na.last = "keep", ties.method = "average")   
+gene.ranked = gene.ranked/max(gene.ranked) 
+net = gene.corr * 0 
+net[bottom] = gene.ranked
+net = net + t(net) 
+diag(net) = 1
+```
+
 
 ##  Aggregating 
 ```{} 
@@ -57,7 +71,7 @@ EGAD::plot_density_compare(aurocs[[1]][,1], aurocs[[1]][,3])
 ```
 
  
-#  Co-expression - single-cell 
+#  Co-expression - single-cell RNA-seq
 ## Data 
 ```{}
 library(Seurat)
@@ -143,5 +157,4 @@ aurocs[[2]] = ""
 EGAD::plot_density_compare(aurocs[[1]][,1], aurocs[[1]][,3])
 ```
 
-
-
+ 
