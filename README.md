@@ -1,6 +1,6 @@
 # How do I...
 
-Short tutorials on how-to do genomic and transcriptomic analyses.
+Short tutorials on genomic and transcriptomic analyses.
 
 [align RNA-seq data](/workflows/howtos_alignment.md) 
 
