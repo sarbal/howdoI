@@ -3,6 +3,48 @@ plugins:
     - jekyll-remote-theme
 remote_theme: allejo/jekyll-docs-theme
 
-logo: /imgs/logo.gif
-header:
- images: /imgs/header.jpg
+project:
+    version: 0.1.0
+    download_url: https://github.com/sarbal/howdoI/
+
+license:
+    software: MIT License
+    software_url: http://opensource.org/licenses/MIT
+
+    docs: CC BY 3.0
+    docs_url: http://creativecommons.org/licenses/by/3.0/
+
+links:
+    header:
+      - title: GitHub
+        url: https://github.com/sarbal/howdoI
+    footer:
+      - title: GitHub
+        url: https://github.com/sarbal/howdoI/
+      - title: Issues
+        url: https://github.com/sarbal/howdoI/issues?state=open
+
+ui:
+    header:
+        color1: "#080331"
+        color2: "#673051"
+        trianglify: true
+
+social:
+    github:
+        user: sarbal
+        repo: howdoI
+    twitter:
+        enabled: false
+        via:
+        hash:
+        account:
+    facebook:
+        enabled: false
+        profileUrl:
+
+# Build settings
+markdown: kramdown
+exclude:
+    - Gemfile
+    - Gemfile.lock
