@@ -1,4 +1,10 @@
 ---
-title: 'How-to'
+title: 'How-to: download data from GEO'
 ---
-# Running 
+
+# Install the wrapper
+library(GEOQuery)
+
+
+# Download data
+ 
