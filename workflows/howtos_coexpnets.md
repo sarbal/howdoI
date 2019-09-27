@@ -8,7 +8,13 @@ Gene expression profiles that co-vary suggest co-regulation, co-function or co-l
 ## Data 
 Read in expression data. This could be counts or normalized data. A minimum of 20 samples per experiment is recommended. And genes with expression in at least 80% of these samples, with at least 1 CPM.  
 ```{}
-counts = read.table("counts.txt")
+load("counts.Rdata") 
+calc_cpm <- function(X){
+        K  = colSums(X)
+        X.cpm = sapply(1:length(K), function(k) 10^6*X[,k]/K[k] )
+        return(X.cpm)
+} 
+
 cpm = calc_cpm(counts)
 nsamp = dim(counts)[2] 
 keep = rowSums(cpm >=1) > (0.8 * nsamp) 
@@ -74,9 +80,18 @@ EGAD::plot_density_compare(aurocs[[1]][,1], aurocs[[1]][,3])
  
 #  Co-expression - single-cell RNA-seq
 ## Data 
+Navigate to: 
+https://support.10xgenomics.com/single-cell-gene-expression/datasets/3.0.0/pbmc_10k_v3
+Submit permissions. Download filtered feature matrix folder: 
+```
+wget http://cf.10xgenomics.com/samples/cell-exp/3.0.0/pbmc_10k_v3/pbmc_10k_v3_filtered_feature_bc_matrix.tar.gz
+gunzip pbmc_10k_v3_filtered_feature_bc_matrix.tar.gz
+```
+## Read and parse data using Seurat
+Note, v3 chemistry has higher mitohondrial %. Not sure if this is techincal or that more cells are dying due to the new chemistry. 
 ```{}
 library(Seurat)
-data <- Read10X(data.dir = "10x/v3_chemistry/10k_pbmcs_healthy_donor/filtered_feature_bc_matrix/")
+data <- Read10X(data.dir = "filtered_feature_bc_matrix/")
 pbmc <- CreateSeuratObject(counts = data, project = "pbmc", min.cells = 3, min.features = 200)
 pbmc[["percent.mt"]] <- PercentageFeatureSet(pbmc, pattern = "^MT-")
 VlnPlot(pbmc, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3)
@@ -109,16 +124,22 @@ exprs = as.matrix(pbmc@assays$RNA@data)
 net = build_coexp_network(exprs, genes )
 save(net, file="coexp.norm.Rdata")
 
-exprs = as.matrix(pbmc@assays$RNA@counts)
-net = build_coexp_network(exprs, genes )
-save(net, file="coexp.raw.Rdata")
-
-
 exprs = calc_cpm( as.matrix(pbmc@assays$RNA@counts))
 net = build_coexp_network(exprs, genes )
 save(net, file="coexp.cpm.Rdata")
 
+exprs = as.matrix(pbmc@assays$RNA@counts)
+net = build_coexp_network(exprs, genes )
+save(net, file="coexp.raw.Rdata")
 ```
+
+## Assessing  
+```{}
+aurocs = run_GBA(net, annotations)
+aurocs[[2]] = ""
+EGAD::plot_density_compare(aurocs[[1]][,1], aurocs[[1]][,3])
+```
+
 
 ##  Aggregating 
 ```{} 
