@@ -76,7 +76,7 @@ EGAD::plot_density_compare(aurocs[[1]][,1], aurocs[[1]][,3])
 ## Data 
 ```{}
 library(Seurat)
-data <- Read10X(data.dir = "U:/XSKEW/sc/10x/v3_chemistry/10k_pbmcs_healthy_donor/filtered_feature_bc_matrix/")
+data <- Read10X(data.dir = "10x/v3_chemistry/10k_pbmcs_healthy_donor/filtered_feature_bc_matrix/")
 pbmc <- CreateSeuratObject(counts = data, project = "pbmc", min.cells = 3, min.features = 200)
 pbmc[["percent.mt"]] <- PercentageFeatureSet(pbmc, pattern = "^MT-")
 VlnPlot(pbmc, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3)
