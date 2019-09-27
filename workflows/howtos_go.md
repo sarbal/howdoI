@@ -17,7 +17,7 @@ wget http://geneontology.org/gene-associations/gene_association.mgi.gz
 ```
 wget ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/gene_info.gz
 ```
-## Make gene id two name file, for each species
+## Make gene id to name file, for each species
 ```
 zcat gene_info.gz | cut -f1-3 > temp
 grep '^9606'   -w temp | cut -f2-3 > 9606.ID2name  # Human
@@ -27,15 +27,15 @@ grep '^559292' -w temp | cut -f2-3 > 559292.ID2name # Yeast
 
 # Parse ontology (do only once)
 ```
-perl ~/bin/ontology_parser/parse_GO_ontology.pl go.obo
-perl ~/bin/ontology_parser/make_desc_list.pl go.obo.rel GOdesc
+perl /bin/parse_GO_ontology.pl go.obo
+perl /bin/make_desc_list.pl go.obo.rel GOdesc
 ```
 
 # Filter and build on human data 
 ```
 zcat goa_human.gaf.gz | cut -f3,5,7,11  | grep -v ^! > goa_human.split
-perl ~/bin/ontology_parser/parse_goa_with_iia.pl 9606.ID2name goa_human.split
-perl ~/bin/ontology_parser/get_goa_with_desc_ext.pl goa_human.split.parsed GOdesc > goa_human.split.parsed.desc
+perl /bin/parse_goa_with_iia.pl 9606.ID2name goa_human.split
+perl /bin/get_goa_with_desc_ext.pl goa_human.split.parsed GOdesc > goa_human.split.parsed.desc
 ```
 
 # Parse and process in R 
