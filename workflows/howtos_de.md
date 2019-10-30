@@ -3,8 +3,15 @@ title: 'How-to: run a differential expression analysis'
 ---
 # Running DESeq2 
 For comprehensive tutorials, see here: 
+http://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html
+
 # Running edgeR
-# Running basic DE 
+For the user guide, see here: 
+https://www.bioconductor.org/packages/release/bioc/vignettes/edgeR/inst/doc/edgeRUsersGuide.pdf
+
+
+
+# Running simple/wilcox based DE 
 
 ```
 calc_DE <- function(X, f.a, filt, group){
@@ -39,15 +46,18 @@ deg = calc_DE(cpm, keep, subset, groups  )
 
 ```
 
-
-
-
-## Setting up
 ## DE between cases and controls 
-## DE between multiple conditions 
-## DE with low sample numbers 
-## DE with unbalanced samples 
+Cases are codified as 1, contols as 0. 
 
+## DE with low sample numbers 
+Don't do it! But if you must, DESeq2 is probably best. 
+
+## DE between multiple conditions 
+DESeq2 does this automatically. 
+Pairwise analysis below. 
+
+## DE with unbalanced samples 
+Downsample, repeat and average.  
 
 
 
