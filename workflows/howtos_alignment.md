@@ -291,7 +291,7 @@ library(dplyr)
 library(ggplot2)
 
 # Load STAR solo output (reads in matrix.mtx file)
-data <- read10xCounts("Solo.out/")
+sce <- read10xCounts("Solo.out/")
 
 # Rank barcodes to find knee and inflection points -> where UMI counts shift suggesting empty drops/ambient RNA
 br.out <- barcodeRanks(counts(sce))
