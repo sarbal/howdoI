@@ -6,7 +6,8 @@ title: 'How-to: perform gene set enrichment analysis'
 # Set up environment 
 ```
 library(EGAD)
- gene_set_enrichment <- function(genes, genes.labels, voc){
+
+gene_set_enrichment <- function(genes, genes.labels, voc){
 
         genes.names = rownames(genes.labels)
         labels.names = colnames(genes.labels)
@@ -39,11 +40,58 @@ library(EGAD)
         return (results)
 
 }
+
+# See also DE page for other functions
+calc_DE <- function(cpm, filt.row, filt.col, group){
+  X = cpm[filt.row,filt.col]
+  group = group[filt.col]
+  if( sum(group==1) < 2  ) {
+    m.X1 = (X[,group==1])
+  } else {
+    m.X1 = rowMeans(X[,group==1])
+  }
+  if( sum(group==2) < 2  ) {
+    m.X2 = (X[,group==2])
+  } else {
+    m.X2 = rowMeans(X[,group==2])
+  }
+  m.X = rowMeans(X)
+  fc = log2(m.X1/m.X2)
+  X.ps_g = sapply(1:dim(X)[1], function(k) wilcox.test(X[k,group==1], X[k,group==2], alt="g")$p.val)
+  X.padj_g = p.adjust(X.ps_g , method = "BH")
+  
+  X.ps_l = sapply(1:dim(X)[1], function(k) wilcox.test(X[k,group==1], X[k,group==2], alt="l")$p.val)
+  X.padj_l = p.adjust(X.ps_l , method = "BH")
+  
+  de = cbind(m.X, fc, X.ps_g, X.padj_g, X.ps_l, X.padj_l, m.X1, m.X2)
+  return(de)
+}
+
 ```
 # Get data 
+## DE gene list 
 ```
-gene_list = run_de(exprs, conditions)
+load("cpm.Rdata")
 
+degs = calc_DE(cpm, filt.row, filt.col, groups)
+filt.col = groups > 0
+n = sum(filt.col)
+filt.row = rowSums(cpm > 0) > (0.8*n)
+
+fcs = deg[,2]
+qval = deg[,4]
+filt.sig = abs(fcs) >= 2 & qval <= 0.05 
+
+gene_list = rownames(deg)[filt.sig]
+```
+## Other gene lists 
+```
+gene_list = read.table("essential_genes") 
+gene_list = read.table("hi_genes")
+gene_list = read.table("synap_genes")
+```
+# Set up GO annotation matrix 
+```
 gogenes <- unique(GO.human[,1])
 goterms <- unique(GO.human[,3])
 annotations <- make_annotations(GO.human[,c(2,3)],gogenes,goterms)
@@ -51,7 +99,7 @@ annotations <- make_annotations(GO.human[,c(2,3)],gogenes,goterms)
 
 # Run
 ```
-enrichments = gene_set_enrichment(gene_list, annotations, voc)
+enrichments = gene_set_enrichment(gene_list, annotations, GO.voc)
 ```
 
 
