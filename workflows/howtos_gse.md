@@ -69,7 +69,9 @@ calc_DE <- function(cpm, filt.row, filt.col, group){
 
 ```
 # Get data 
+For gene set enrichment, you need a list of genes of interest (gene list), and a knowledge base (annotations) you want to assess it with. The function here also uses a vocabulary (to help understand the annotations), but is not necessary. Code can be tweaked to remove it. 
 ## DE gene list 
+One type of gene list can be from a differential expression experiment. Here is an example. 
 ```
 load("cpm.Rdata")
 
@@ -85,21 +87,29 @@ filt.sig = abs(fcs) >= 2 & qval <= 0.05
 gene_list = rownames(deg)[filt.sig]
 ```
 ## Other gene lists 
+But of course, other gene lists can be used. 
 ```
 gene_list = read.table("essential_genes") 
 gene_list = read.table("hi_genes")
 gene_list = read.table("synap_genes")
 ```
-# Set up GO annotation matrix 
+# Set up annotation matrix 
+## GO annotations
+These files/variables are loaded from EGAD or generated in this [tutorial](/workflows/howtos_go.md).
 ```
 gogenes <- unique(GO.human[,1])
 goterms <- unique(GO.human[,3])
 annotations <- make_annotations(GO.human[,c(2,3)],gogenes,goterms)
+voc <- GO.voc 
+```
+## Annotations from other databases
+You can use any other type of data, as long as it can be tranformed into a binary matrix (indicating blah) in the format of genes by function/pathway/term. 
+```
 ```
 
 # Run
 ```
-enrichments = gene_set_enrichment(gene_list, annotations, GO.voc)
+enrichments = gene_set_enrichment(gene_list, annotations, voc)
 ```
 
 
