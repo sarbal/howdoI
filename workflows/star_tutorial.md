@@ -88,14 +88,14 @@ STAR \
 ```
 
 # Inspecting output 
-Start R, and then read in bulk sample 
+Start R, and then read in the bulk sample output.  
 ```{r}
-files = as.character(unlist(read.table("runs") ))
+files = "STAR_out"
 genecounts = "ReadsPerGene.out.tab"
 splicejunctions = "SJ.out.tab"
 logname = "Log.final.out"
-load("gene_annotations.Rdata")
-dir = "outs/"
+# load("gene_annotations.Rdata")
+dir = "."
 
 Ns = list()
 i = 1
