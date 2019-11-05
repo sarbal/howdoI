@@ -94,7 +94,7 @@ files = "STAR_out"
 genecounts = "ReadsPerGene.out.tab"
 splicejunctions = "SJ.out.tab"
 logname = "Log.final.out"
-# load("gene_annotations.Rdata")
+load("/data/genomes/GRCh38_Gencode31/gene_annotations_v31.Rdata") # see other tutorial on how to make this
 dir = "."
 
 Ns = list()
@@ -137,8 +137,8 @@ for( n in files ){
  print(i)
  i = i + 1
 }
-
-rownames(counts_exp) = attr$ensemblID
+rownames(counts_exp) = N$genes  # should be the same for all samples if run on the same genome 
+# rownames(counts_exp) = attr$ensemblID # ignore for now
 colnames(counts_exp) = files
 save(Ns, counts_exp, file=paste(dir, "counts.Rdata", sep=""))
 ```
