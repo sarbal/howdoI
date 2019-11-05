@@ -256,7 +256,7 @@ for( n in files ){
     N$counts2      = counts[(1:N$length)+4,3]
     N$counts3      = counts[(1:N$length)+4,4]
  } else {
-   # Stranded or unstranded? Spot check this before running the code. Should use the last column if stranded. Otherwise first/max. 
+   # Stranded or unstranded? Spot check this before running the code. Should use the last column if stranded (or max of 2nd/3rd). Otherwise first column (unstranded). 
    N$counts3 = rep(0, length(attr$ensemblID ) )
  }
  if( i > 1  ){
