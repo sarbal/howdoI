@@ -136,19 +136,17 @@ ids2 = gsub(" ", "", idssplit[,1] )
 part1 = cbind( temp[filt,1:8], ids2, genetype, genename)
 
 # EntrezIDs not provided in GTF file, need to add it 
-m = match(uid2symbol[,2], part1[,12])
+m = match(uid2symbol[,2], part1[,11])
 f.u = !is.na(m)
 f.p = m[f.u]
 part1 = cbind(part1,part1[,1])
-part1[,13] = NA
-part1[f.p,13] = uid2symbol[f.u,1]
+part1[,12] = NA
+part1[f.p,12] = uid2symbol[f.u,1]
 
 # File format is not always consistent, need to be careful here, but mainly removing things/columns we don't need
-attr = part1[,-2]
-attr = attr[,-2]
-attr = attr[,-4]
+attr = part1[,c(-2,-3,-6,-8)]
 
-colnames(attr) = c("chr", "start","end", "strand","un", "ensemblID", "type", "stat", "name", "entrezID")
+colnames(attr) = c("chr", "start","end", "strand", "ensemblID", "type",  "name", "entrezID")
 save(attr, file="gene_annotations_v31.Rdata")
 
 ```
