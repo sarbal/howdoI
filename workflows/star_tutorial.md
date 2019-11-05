@@ -39,8 +39,22 @@ But, the inputs (and outputs) can be found in this folder on tyrone:
 ```{}
 ls /data/sballouz
 ase_run  bulk_run  single_cell_run
+
+ls /data/sballouz/bulk_run
+fastq  fastqc_out  STAR_out  xcgd_carrier_1_pbmc_S4_R1_001_sub.fastq  xcgd_carrier_1_pbmc_S4_R2_001_sub.fastq
+
+ls /data/sballouz/single_cell_run
+SCGC-GILL-JG-03_S1_L001_I1_001.fastq.gz  SCGC-GILL-JG-03_S1_L003_R1_001.fastq.gz
+SCGC-GILL-JG-03_S1_L001_R1_001.fastq.gz  SCGC-GILL-JG-03_S1_L003_R2_001.fastq.gz
+SCGC-GILL-JG-03_S1_L001_R2_001.fastq.gz  SCGC-GILL-JG-03_S1_L004_I1_001.fastq.gz
+SCGC-GILL-JG-03_S1_L002_I1_001.fastq.gz  SCGC-GILL-JG-03_S1_L004_R1_001.fastq.gz
+SCGC-GILL-JG-03_S1_L002_R1_001.fastq.gz  SCGC-GILL-JG-03_S1_L004_R2_001.fastq.gz
+SCGC-GILL-JG-03_S1_L002_R2_001.fastq.gz  STAR_out_old
+SCGC-GILL-JG-03_S1_L003_I1_001.fastq.gz  STAR_out_updated
+
+ls /data/sballouz/ase_run
 ```
-Feel free to copy or link. 
+Feel free to copy or link to these directories. 
 
 # Prepare genome 
 Run from the same directory or from the genome location. 
