@@ -47,8 +47,9 @@ Run from the same directory or from the genome location.
 Specify output directories. 
 Note, depending where you run this, you might need to modify RAM and number of threads. 
 Overhang is default. Many other options can be tweaked and depend on the species and application. 
+*You can only use the same STAR version for mapping that generated the genome!*
 ```{}
-STAR  \
+/home/sballouz/tools/STAR-2.7.3a/STAR   \
 --runThreadN 10       \
 --runMode genomeGenerate  \
 --genomeDir GRCh38_Gencode31   \
@@ -61,13 +62,22 @@ STAR  \
 # Alignment 
 ## Bulk RNA-seq experiment
 ```{}
-STAR \
+/home/sballouz/tools/STAR-2.7.3a/STAR  \
 --genomeDir /data/genomes/GRCh38_Gencode31/ \
 --readFilesIn /data/sballouz/bulk_run/xcgd_carrier_1_pbmc_S4_R1_001.fastq  /data/sballouz/bulk_run/xcgd_carrier_1_pbmc_S4_R2_001.fastq \
 --outSAMtype BAM SortedByCoordinate \
 --quantMode GeneCounts \
 --twopassMode Basic \
 --twopass1readsN -1 \
+--runThreadN 10
+```
+
+```{}
+/home/sballouz/tools/STAR-2.7.3a/STAR  \
+--genomeDir /data/genomes/GRCh38_Gencode31/ \
+--readFilesIn /data/sballouz/bulk_run/xcgd_carrier_1_pbmc_S4_R1_001_sub.fastq  /data/sballouz/bulk_run/xcgd_carrier_1_pbmc_S4_R2_001_sub.fastq \
+--outSAMtype BAM SortedByCoordinate \
+--quantMode GeneCounts \
 --runThreadN 10
 ```
 
