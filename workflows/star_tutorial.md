@@ -34,8 +34,8 @@ gunzip *
 ```
 
 ## Reads/experiment
-I have two experiments, but they are a little large and we wont have time to wait for the alignment results during this workshop. 
-But, the inputs (and outputs) can be found in this folder on tyrone:  
+I have two experiments but they are a little large and we wont have time to wait for the alignment results during this workshop. But I've made smaller buk files to play with, and the you can use one of the single-cell paired runs to test. 
+Inputs (and outputs) can be found in this folder on tyrone:  
 ```{}
 ls /data/sballouz
 ase_run  bulk_run  single_cell_run
@@ -53,12 +53,12 @@ SCGC-GILL-JG-03_S1_L002_R2_001.fastq.gz  STAR_out_old
 SCGC-GILL-JG-03_S1_L003_I1_001.fastq.gz  STAR_out_updated
 
 ls /data/sballouz/ase_run
+chr_cut  SRR598009  SRR598009.Aligned.sortedByCoord.out.bam  SRR598009.Aligned.sortedByCoord.out.bam.bai
 ```
 Feel free to copy or link to these directories. 
 
 # Prepare genome 
-Run from the same directory or from the genome location. 
-Specify output directories. 
+Run from the same directory or from the genome location. Specify output directories. 
 Note, depending where you run this, you might need to modify RAM and number of threads. 
 Overhang is default. Many other options can be tweaked and depend on the species and application. 
 *You can only use the same STAR version for mapping that generated the genome!*
@@ -112,6 +112,7 @@ STAR \
 ```
 
 # Inspecting output 
+## Bulk 
 Start R, and then read in the bulk sample output.  
 ```{r}
 files = "STAR_out"
@@ -167,5 +168,70 @@ colnames(counts_exp) = files
 save(Ns, counts_exp, file=paste(dir, "counts.Rdata", sep=""))
 ```
 
+## Single-cell 
+If reading in the raw files, you will need to run the droplet processing pipeline first. 
+``{}
+library(DropletUtils)
+library(dplyr)
+library(ggplot2)
+
+# Load STAR solo output (reads in matrix.mtx file)
+sce <- read10xCounts(data.dir = "Solo.out/")
+
+# Rank barcodes to find knee and inflection points -> where UMI counts shift suggesting empty drops/ambient RNA
+br.out <- barcodeRanks(counts(sce))
+br.out.df <- as.data.frame(br.out)
+br.out.df$barcode <- colData(sce)$Barcode
+br.out.df %>% filter(rank <= 10) %>% arrange(rank)
+x_knee <- br.out.df %>% filter(total > br.out$knee) %>% arrange(total) %>% select(rank) %>% head(1)
+x_inflection <- br.out.df %>% filter(total > br.out$inflection) %>% arrange(total) %>% select(rank) %>% head(1)
+padding <- length(br.out$rank) / 10
+  
+
+# Bend the knee!  
+ggplot(br.out.df, aes(x = rank, y = total)) +
+  geom_point() +
+  scale_x_log10() +
+  scale_y_log10() +
+  theme_bw() +
+  theme(axis.text = element_text(size = 10),
+        axis.title = element_text(size = 14),
+        title = element_text(size = 16)) +
+  geom_hline(yintercept = br.out$knee, linetype = 2, colour = "dodgerblue") +
+  geom_hline(yintercept = br.out$inflection, linetype = 2, colour = "forestgreen") +
+  labs(x = "Rank", y = "Total", title = "Barcode Rank vs Total UMI") +
+  annotate("text", label = paste0("Knee (", x_knee, ")"), x = x_knee$rank + padding, y = br.out$knee, size = 5) +
+  annotate("text", label = paste0("Inflection (", x_inflection, ")"), x = x_inflection$rank + padding, y = br.out$inflection, size = 5)
+
+
+# Find the empty drops 
+e.out <- emptyDrops(counts(sce))
+ 
+# use FDR threshold of 0.01
+is.cell <- e.out$FDR <= 0.01
+ 
+# replace all NA's with FALSE
+is.cell.no.na <- is.cell
+is.cell.no.na[is.na(is.cell)] <- FALSE
+sum(is.cell.no.na)
+ 
+
+# Plot 
+ggplot(br.out.df[is.cell.no.na,], aes(x = rank, y = total)) +
+  geom_point() +
+  scale_x_log10() +
+  scale_y_log10() +
+  theme_bw() +
+  theme(axis.text = element_text(size = 10),
+        axis.title = element_text(size = 14),
+        title = element_text(size = 16)) +
+  labs(x = "Rank", y = "Total", title = "Cell barcodes that differ from ambient RNA")
+
+# 
+sce <- sce[,is.cell.no.na]
+save(sce, file="sce.Rdata")
+```
+
+Or if filtered, read that file in instead, and carry on the single-cell analyses.
 
 
