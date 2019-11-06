@@ -9,13 +9,23 @@ mkdir STAR_tutorial
 cd STAR_tutorial
 ```
 
-# Install STAR 
+# Installing 
+## STAR 
 Precompiled binaries are easiest. 
 ```{}
 wget https://github.com/alexdobin/STAR/blob/master/bin/Linux_x86_64_static/STAR
 
 wget https://github.com/alexdobin/STAR/blob/master/bin/MacOSX_x86_64/STAR
 ```
+## Samtools 
+http://www.htslib.org/download/
+## Bedtools 
+https://bedtools.readthedocs.io/en/latest/content/installation.html
+## IGVTools 
+https://software.broadinstitute.org/software/igv/igvtools 
+## GATK 
+https://software.broadinstitute.org/gatk/
+- See if you can get version 3 and 4 
 
 # Get data 
 You will need a genome file (FASTA) and its corresponding annotation file (GTF). There are many locations and ways to download these files. GENCODE (https://www.gencodegenes.org/human/) has data for humans and mouse only, while ENSEMBL (http://useast.ensembl.org/index.html) and NCBI (https://www.ncbi.nlm.nih.gov/search/all/?term=human) will have other species. Note, these are also specific to the latest release and will change over time. 
