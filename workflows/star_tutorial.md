@@ -170,7 +170,7 @@ save(Ns, counts_exp, file=paste(dir, "counts.Rdata", sep=""))
 
 ## Single-cell 
 If reading in the raw files, you will need to run the droplet processing pipeline first. 
-``{}
+```{}
 library(DropletUtils)
 library(dplyr)
 library(ggplot2)
