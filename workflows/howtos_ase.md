@@ -4,10 +4,10 @@ title: 'How-to: allele specific expression'
 
 # Genotypes 
 ## Create a personal genome 
-Using gtgtools to keep a haploid version. Insert only the homozygous alternate SNPs/indels (ie markes as 1/1 in the VCF file). 
+Using gtgtools to make a haploid version. Insert only the homozygous alternate SNPs/indels (ie markes as 1/1 in the VCF file). 
 
 
-Other tools exist to do this, such as WASP. 
+Other tools exist to do this too, such as WASP. This makes diploid genomes, and requires phased genomes.   
 
 
 
