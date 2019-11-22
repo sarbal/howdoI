@@ -10,9 +10,6 @@ Using gtgtools to keep a haploid version. Insert only the homozygous alternate S
 Other tools exist to do this, such as WASP. 
 
 
-## Use the reference genome 
-### With a genotype  
-### Without a genotype  
 
 # Mapping 
 See the RNA-seq alignment page.  
