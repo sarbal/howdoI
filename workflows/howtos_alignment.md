@@ -348,7 +348,7 @@ ggplot(br.out.df[is.cell.no.na,], aes(x = rank, y = total)) +
 
 
 # Aligning with cellranger 
-Since all the necessary referenes come with cellranger (at least human), this is straightforward. For other species, one can repeat the STAR genome index generation. Here is an example from a PBMC human run. 
+Since all the necessary references come with cellranger (at least human), this is straightforward. For other species, one can repeat the STAR genome index generation. Here is an example from a PBMC human run. 
 The fastq files from the sequencing machine should have read 1, read 2 and an index file.  
 ```{}
 ls fastq_path
