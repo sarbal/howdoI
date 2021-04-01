@@ -352,27 +352,27 @@ Since all the necessary references come with cellranger (at least human), this i
 The fastq files from the sequencing machine should have read 1, read 2 and an index file.  
 ```{}
 ls fastq_path
-Gillis_05_XCGD10xGEX_PBMC_S1_L001_I1_001.fastq.gz
-Gillis_05_XCGD10xGEX_PBMC_S1_L001_R1_001.fastq.gz  
-Gillis_05_XCGD10xGEX_PBMC_S1_L001_R2_001.fastq.gz  
-Gillis_05_XCGD10xGEX_PBMC_S1_L002_I1_001.fastq.gz  
-Gillis_05_XCGD10xGEX_PBMC_S1_L002_R1_001.fastq.gz 
-Gillis_05_XCGD10xGEX_PBMC_S1_L002_R2_001.fastq.gz  
-Gillis_05_XCGD10xGEX_PBMC_S1_L003_I1_001.fastq.gz  
-Gillis_05_XCGD10xGEX_PBMC_S1_L003_R1_001.fastq.gz  
-Gillis_05_XCGD10xGEX_PBMC_S1_L003_R2_001.fastq.gz
-Gillis_05_XCGD10xGEX_PBMC_S1_L004_I1_001.fastq.gz
-Gillis_05_XCGD10xGEX_PBMC_S1_L004_R1_001.fastq.gz
-Gillis_05_XCGD10xGEX_PBMC_S1_L004_R2_001.fastq.gz
+10xGEX_PBMC_S1_L001_I1_001.fastq.gz
+10xGEX_PBMC_S1_L001_R1_001.fastq.gz  
+10xGEX_PBMC_S1_L001_R2_001.fastq.gz  
+10xGEX_PBMC_S1_L002_I1_001.fastq.gz  
+10xGEX_PBMC_S1_L002_R1_001.fastq.gz 
+10xGEX_PBMC_S1_L002_R2_001.fastq.gz  
+10xGEX_PBMC_S1_L003_I1_001.fastq.gz  
+10xGEX_PBMC_S1_L003_R1_001.fastq.gz  
+10xGEX_PBMC_S1_L003_R2_001.fastq.gz
+10xGEX_PBMC_S1_L004_I1_001.fastq.gz
+10xGEX_PBMC_S1_L004_R1_001.fastq.gz
+10xGEX_PBMC_S1_L004_R2_001.fastq.gz
 ```
 Cellranger maps and quantifies. One giant bam file is typically produced. This can be parsed for further analyses, and also is a way to capture the experiment as pseudobulk.
 ```{}
-cellranger count --id=Gillis_PBMC \
+cellranger count --id=PBMC \
         --jobmode=sge \
         --transcriptome=refdata-cellranger-GRCh38-3.0.0 \
         --fastqs=fastq_path \
-        --sample=Gillis_PBMC \
-        --project=Gillis
+        --sample=PBMC \
+        --project=PBMCs
 ```
 
 
